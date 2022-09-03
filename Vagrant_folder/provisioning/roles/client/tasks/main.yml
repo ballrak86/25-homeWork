@@ -1,0 +1,30 @@
+---
+# tasks file for client
+- name: Set a hostname
+  hostname:
+    name: ipaclient.otus.local
+    use: systemd
+
+- name: add hostname
+  lineinfile:
+    dest: /etc/hosts
+    line: '192.168.50.15 ipaclient.otus.loacl ipaclient'
+
+- name: install freeipa-client
+  yum:
+    name: freeipa-client
+    state: present
+
+- name: add hostname
+  lineinfile:
+    dest: /etc/resolv.conf
+    regexp: nameserver
+    line: 'nameserver 192.168.50.10'
+
+- name: install ipa-client
+  shell:
+    cmd: 'ipa-client-install --domain="otus.local" -p admin -w 123qweasd --mkhomedir --server="freeipa.otus.local" --realm="OTUS.LOCAL" --hostname="ipaclient.otus.local" --unattended'
+
+- name: kinit
+  shell:
+    cmd: 'echo "123qweasd" | kinit admin'

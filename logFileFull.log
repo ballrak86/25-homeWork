@@ -1,0 +1,208 @@
+root@otssTestServer:/home/lx/git/ldap# vagrant destroy -f; vagrant up
+==> client: Forcing shutdown of VM...
+==> client: Destroying VM and associated drives...
+==> server: Forcing shutdown of VM...
+==> server: Destroying VM and associated drives...
+Bringing machine 'server' up with 'virtualbox' provider...
+==> server: Importing base box 'centos/7'...
+==> server: Matching MAC address for NAT networking...
+==> server: Checking if box 'centos/7' version '2004.01' is up to date...
+==> server: Setting the name of the VM: ldap_server_1662186061041_51150
+==> server: Clearing any previously set network interfaces...
+==> server: Preparing network interfaces based on configuration...
+    server: Adapter 1: nat
+    server: Adapter 2: intnet
+==> server: Forwarding ports...
+    server: 22 (guest) => 2222 (host) (adapter 1)
+==> server: Running 'pre-boot' VM customizations...
+==> server: Booting VM...
+==> server: Waiting for machine to boot. This may take a few minutes...
+    server: SSH address: 127.0.0.1:2222
+    server: SSH username: vagrant
+    server: SSH auth method: private key
+    server:
+    server: Vagrant insecure key detected. Vagrant will automatically replace
+    server: this with a newly generated keypair for better security.
+    server:
+    server: Inserting generated public key within guest...
+    server: Removing insecure key from the guest if it's present...
+    server: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> server: Machine booted and ready!
+==> server: Checking for guest additions in VM...
+    server: No guest additions were detected on the base box for this VM! Guest
+    server: additions are required for forwarded ports, shared folders, host only
+    server: networking, and more. If SSH fails on this machine, please install
+    server: the guest additions and repackage the box to continue.
+    server:
+    server: This is not an error message; everything may continue to work properly,
+    server: in which case you may ignore this message.
+==> server: Setting hostname...
+==> server: Configuring and enabling network interfaces...
+==> server: Rsyncing folder: /home/lx/git/ldap/ => /vagrant
+==> server: Running provisioner: ansible...
+Vagrant gathered an unknown Ansible version:
+
+ansible [core 2.11.7]
+  config file = /home/lx/git/ldap/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.6/dist-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.6.9 (default, Jun 29 2022, 11:45:57) [GCC 8.4.0]
+  jinja version = 3.0.3
+  libyaml = True
+
+and falls back on the compatibility mode '1.8'.
+
+Alternatively, the compatibility mode can be specified in your Vagrantfile:
+https://www.vagrantup.com/docs/provisioning/ansible_common.html#compatibility_mode
+
+    server: Running ansible-playbook...
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the
+controller starting with Ansible 2.12. Current version: 3.6.9 (default, Jun 29
+2022, 11:45:57) [GCC 8.4.0]. This feature will be removed from ansible-core in
+version 2.12. Deprecation warnings can be disabled by setting
+deprecation_warnings=False in ansible.cfg.
+
+PLAY [server] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [server]
+
+TASK [server : Set a hostname] *************************************************
+changed: [server]
+
+TASK [server : add hostname] ***************************************************
+changed: [server]
+
+TASK [server : install pacage bind and ipa] ************************************
+changed: [server]
+
+TASK [server : start rngd] *****************************************************
+changed: [server]
+
+TASK [server : start named] ****************************************************
+changed: [server]
+
+TASK [server : update nss] *****************************************************
+changed: [server]
+
+TASK [server : install ipa server] *********************************************
+changed: [server]
+[WARNING]: Could not match supplied host pattern, ignoring: client
+
+PLAY [client] ******************************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+server                     : ok=8    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+Bringing machine 'client' up with 'virtualbox' provider...
+==> client: Importing base box 'centos/7'...
+==> client: Matching MAC address for NAT networking...
+==> client: Checking if box 'centos/7' version '2004.01' is up to date...
+==> client: Setting the name of the VM: ldap_client_1662187520177_18001
+==> client: Fixed port collision for 22 => 2222. Now on port 2200.
+==> client: Clearing any previously set network interfaces...
+==> client: Preparing network interfaces based on configuration...
+    client: Adapter 1: nat
+    client: Adapter 2: intnet
+==> client: Forwarding ports...
+    client: 22 (guest) => 2200 (host) (adapter 1)
+==> client: Running 'pre-boot' VM customizations...
+==> client: Booting VM...
+==> client: Waiting for machine to boot. This may take a few minutes...
+    client: SSH address: 127.0.0.1:2200
+    client: SSH username: vagrant
+    client: SSH auth method: private key
+    client:
+    client: Vagrant insecure key detected. Vagrant will automatically replace
+    client: this with a newly generated keypair for better security.
+    client:
+    client: Inserting generated public key within guest...
+    client: Removing insecure key from the guest if it's present...
+    client: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> client: Machine booted and ready!
+==> client: Checking for guest additions in VM...
+    client: No guest additions were detected on the base box for this VM! Guest
+    client: additions are required for forwarded ports, shared folders, host only
+    client: networking, and more. If SSH fails on this machine, please install
+    client: the guest additions and repackage the box to continue.
+    client:
+    client: This is not an error message; everything may continue to work properly,
+    client: in which case you may ignore this message.
+==> client: Setting hostname...
+==> client: Configuring and enabling network interfaces...
+==> client: Rsyncing folder: /home/lx/git/ldap/ => /vagrant
+==> client: Running provisioner: ansible...
+Vagrant gathered an unknown Ansible version:
+
+ansible [core 2.11.7]
+  config file = /home/lx/git/ldap/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.6/dist-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.6.9 (default, Jun 29 2022, 11:45:57) [GCC 8.4.0]
+  jinja version = 3.0.3
+  libyaml = True
+
+and falls back on the compatibility mode '1.8'.
+
+Alternatively, the compatibility mode can be specified in your Vagrantfile:
+https://www.vagrantup.com/docs/provisioning/ansible_common.html#compatibility_mode
+
+    client: Running ansible-playbook...
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the
+controller starting with Ansible 2.12. Current version: 3.6.9 (default, Jun 29
+2022, 11:45:57) [GCC 8.4.0]. This feature will be removed from ansible-core in
+version 2.12. Deprecation warnings can be disabled by setting
+deprecation_warnings=False in ansible.cfg.
+
+PLAY [server] ******************************************************************
+skipping: no hosts matched
+
+PLAY [client] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [client]
+
+TASK [client : Set a hostname] *************************************************
+changed: [client]
+
+TASK [client : add hostname] ***************************************************
+changed: [client]
+
+TASK [client : install freeipa-client] *****************************************
+changed: [client]
+
+TASK [client : add hostname] ***************************************************
+changed: [client]
+
+TASK [client : install ipa-client] *********************************************
+changed: [client]
+
+TASK [client : kinit] **********************************************************
+changed: [client]
+
+PLAY RECAP *********************************************************************
+client                     : ok=7    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+root@otssTestServer:/home/lx/git/ldap# nano Vagrantfile
+root@otssTestServer:/home/lx/git/ldap# vagrant ssh client
+Last login: Sat Sep  3 06:46:47 2022 from 10.0.2.2
+[vagrant@ipaclient ~]$ sudo -i
+[root@ipaclient ~]# klist
+Ticket cache: KEYRING:persistent:0:0
+Default principal: admin@OTUS.LOCAL
+
+Valid starting     Expires            Service principal
+09/03/22 06:46:48  09/04/22 06:46:48  krbtgt/OTUS.LOCAL@OTUS.LOCAL
+[root@ipaclient ~]# ssh admin@localhost
+The authenticity of host 'localhost (<no hostip for proxy command>)' can't be established.
+ECDSA key fingerprint is SHA256:h8aDCf/wG/Gk3sj5TDoTZWT1WllG+2ayeqSm9I7Vc28.
+ECDSA key fingerprint is MD5:72:5f:38:98:94:16:d9:29:41:33:c6:06:8f:1b:25:32.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'localhost' (ECDSA) to the list of known hosts.
+Password:
+Creating home directory for admin.
+[admin@ipaclient ~]$

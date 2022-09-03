@@ -1,0 +1,45 @@
+---
+# tasks file for server
+- name: Set a hostname
+  hostname:
+    name: freeipa.otus.local
+    use: systemd
+
+- name: add hostname
+  lineinfile:
+    dest: /etc/hosts
+    line: '192.168.50.10 freeipa.otus.local'
+
+- name: install pacage bind and ipa
+  yum:
+    name:
+      - bind
+      - bind-utils
+      - bind-dyndb-ldap
+      - ipa-server
+      - ipa-client
+      - ipa-server-dns
+      - rng-tools
+      - nss
+    state: present
+
+- name: start rngd
+  systemd:
+    name: rngd
+    state: started
+    enabled: yes
+
+- name: start named
+  systemd:
+    name: named
+    state: started
+    enabled: yes
+
+- name: update nss
+  yum:
+    name: 'nss*'
+    state: latest
+    
+- name: install ipa server
+  shell:
+    cmd: 'ipa-server-install -p 12345678 -a 123qweasd --domain="otus.local" --realm="OTUS.LOCAL" --hostname="freeipa.otus.local" --setup-dns --no-forwarders --no-reverse --mkhomedir --unattended'
